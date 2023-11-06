@@ -6,7 +6,7 @@ from sklearn.model_selection import train_test_split
 from datetime import datetime
 from fastapi.middleware.cors import CORSMiddleware
 
-# Define the request body model for predictions
+
 class DateInput(BaseModel):
     year: int
     month: int
@@ -14,6 +14,14 @@ class DateInput(BaseModel):
 
 # Initialize FastAPI app
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # Load the dataset
 df = pd.read_csv('co2_levels_thailand_regions.csv')
